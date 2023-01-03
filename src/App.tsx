@@ -3,7 +3,7 @@ import axios from 'axios';
 import './destyle.css';
 import './App.scss';
 
-import StockPriceChart from './molecules/StockPriceChart';
+import StockPriceChart from './components/molecules/StockPriceChart';
 
 import { stockPrice } from './types/stockPrice';
 
@@ -13,7 +13,8 @@ function App() {
   const [data, setData] = useState<stockPrice[]>([]);
   const [code, setCode] = useState<string>('');
 
-  const addData = () => {
+  const addData = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     axios.get(`${baseURL}?code=${code}`).then((res) => {
       const stockPrice: stockPrice = {
         code,
@@ -26,18 +27,20 @@ function App() {
 
   return (
     <div className="App">
-      <div className="input-area">
-        <div className="input">
-          <input
-            type="number"
-            placeholder="証券コードを入力"
-            onChange={(e) => setCode(e.target.value)}
-          />
+      <form onSubmit={addData}>
+        <div className="input-area">
+          <div className="input">
+            <input
+              type="number"
+              placeholder="証券コードを入力"
+              onChange={(e) => setCode(e.target.value)}
+            />
+          </div>
+          <button className="add-button" type="submit">
+            追加
+          </button>
         </div>
-        <button className="add-button" onClick={addData}>
-          追加
-        </button>
-      </div>
+      </form>
       <div className="chart-area">
         {data.length > 0 &&
           data.map((d, index) => <StockPriceChart stockPrice={data[index]} />)}

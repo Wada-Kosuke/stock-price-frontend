@@ -1,6 +1,6 @@
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { stockPrice } from '../types/stockPrice';
+import { stockPrice } from '../../types/stockPrice';
 
 ChartJS.register(...registerables);
 
