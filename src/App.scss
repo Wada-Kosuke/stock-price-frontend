@@ -1,7 +1,7 @@
 .App {
   background-color: #282c34;
   min-height: 100vh;
-  padding: 20px;
+  padding: 20px 40px;
 
   .input-area {
     display: flex;
@@ -34,7 +34,7 @@
 
   .chart-area {
     display: grid;
-    gap: 10px;
+    gap: 16px;
     grid-template-columns: repeat(2, 1fr);
   }
 }

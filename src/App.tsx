@@ -15,14 +15,28 @@ function App() {
 
   const addData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios.get(`${baseURL}?code=${code}`).then((res) => {
-      const stockPrice: stockPrice = {
-        code,
-        date: Object.keys(res.data).map((d: string) => d.slice(0, 10)),
-        price: Object.values(res.data),
-      };
-      setData([...data, stockPrice]);
-    });
+    axios
+      .get(`${baseURL}?code=${code}`)
+      .then((res) => {
+        if (data.find((d) => d.code === code)) {
+          window.alert('既に取得済みのデータです。');
+          return;
+        }
+
+        if (!Object.keys(res.data).length) {
+          window.alert('指定した証券コードは存在しません。');
+          return;
+        }
+
+        const stockPrice: stockPrice = {
+          code,
+          date: Object.keys(res.data).map((d: string) => d.slice(0, 10)),
+          price: Object.values(res.data),
+        };
+        setData([...data, stockPrice]);
+        setCode('');
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -33,6 +47,7 @@ function App() {
             <input
               type="number"
               placeholder="証券コードを入力"
+              value={code}
               onChange={(e) => setCode(e.target.value)}
             />
           </div>
