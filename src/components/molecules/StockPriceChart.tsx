@@ -8,6 +8,8 @@ interface props {
   stockPrice: stockPrice;
 }
 
+const gridColor = '#404651';
+
 function StockPriceChart(props: props) {
   return (
     <div className="molecules-stock-price-chart">
@@ -16,10 +18,33 @@ function StockPriceChart(props: props) {
           labels: props.stockPrice.date,
           datasets: [
             {
-              label: props.stockPrice.code,
               data: props.stockPrice.price,
             },
           ],
+        }}
+        options={{
+          plugins: {
+            legend: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: props.stockPrice.code,
+              color: '#aaa',
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                color: gridColor,
+              },
+            },
+            y: {
+              grid: {
+                color: gridColor,
+              },
+            },
+          },
         }}
       />
     </div>
