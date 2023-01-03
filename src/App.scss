@@ -1,0 +1,39 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  padding: 20px;
+
+  .input-area {
+    display: flex;
+    width: max-content;
+    margin: auto;
+    font-size: 14px;
+
+    .input {
+      border: 1px solid #555c68;
+      width: 140px;
+
+      input {
+        width: 100%;
+        padding: 3px;
+      }
+    }
+
+    .add-button {
+      background-color: #555c68;
+      margin-left: 10px;
+      padding: 2px 4px;
+      border-radius: 2px;
+
+      &:active {
+        transform: translate(1px, 1px);
+      }
+    }
+  }
+
+  .chart-area {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

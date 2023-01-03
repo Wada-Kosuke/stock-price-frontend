@@ -16,7 +16,7 @@ function StockPriceChart(props: props) {
           labels: props.stockPrice.date,
           datasets: [
             {
-              label: '',
+              label: props.stockPrice.code,
               data: props.stockPrice.price,
             },
           ],
