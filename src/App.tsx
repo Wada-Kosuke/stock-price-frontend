@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-
-import logo from './logo.svg';
 import './App.css';
 
-ChartJS.register(...registerables);
-const baseURL = 'http://localhost:8000';
+import StockPriceChart from './molecules/StockPriceChart';
 
-interface stockPrice {
-  date: string[];
-  price: number[];
-}
+import { stockPrice } from './types/stockPrice';
+
+const baseURL = 'http://localhost:8000';
 
 function App() {
   const [data, setData] = useState<stockPrice[]>([]);
@@ -29,35 +23,8 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
       {data.length &&
-        data.map((d, index) => (
-          <Line
-            key={d.date[index]}
-            data={{
-              labels: d.date,
-              datasets: [
-                {
-                  label: '',
-                  data: d.price,
-                },
-              ],
-            }}
-          />
-        ))}
+        data.map((d, index) => <StockPriceChart stockPrice={data[index]} />)}
     </div>
   );
 }
